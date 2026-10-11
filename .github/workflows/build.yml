@@ -1,0 +1,28 @@
+# Daily rebuild of the feed files from the live shop, before Awin's 03:00 UTC fetch. GitHub Pages serves them.
+# A failed build emails the repository owner; the previous good file stays in place.
+name: Build feeds
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the feed files
+        run: python3 build.py
+      - name: Commit any changes
+        if: always()
+        run: |
+          git config user.name "Told feed builder"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Feeds rebuilt $(date -u +%Y-%m-%dT%H:%MZ)" || echo "Nothing changed"
+          git push
