@@ -1,10 +1,12 @@
 # Daily rebuild of the feed files from the live shop, before Awin's 03:00 UTC fetch. GitHub Pages serves them.
+# Scheduled at 19:00 UTC, not 02:00: GitHub starts scheduled jobs hours late (02:00 ran at 08:28 and 08:51 on
+# 12 and 13 Oct 2026), so an early-evening start still lands before Awin's fetch.
 # A failed build emails the repository owner; the previous good file stays in place.
 name: Build feeds
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 19 * * *'
   workflow_dispatch:
 
 permissions:
