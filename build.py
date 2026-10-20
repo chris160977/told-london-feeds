@@ -75,6 +75,10 @@ def main():
             print('%s: NOT replaced (%s); the previous file stays' % (name, problem))
             failed.append(name)
             continue
+        if name.endswith('.tsv'):
+            # The theme template leaves a blank line after every row; some importers (Addrevenue) count each one
+            # as an empty product, so write only the non-empty lines.
+            body = '\n'.join(l for l in body.splitlines() if l.strip()) + '\n'
         with open(name, 'w', encoding='utf-8', newline='') as f:
             f.write(body)
         print('%s: %d bytes' % (name, len(body.encode())))
