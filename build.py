@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Builds Told London's Awin product feed files from the live shop (toldlondon.com).
+"""Builds Told London's product feed files from the live shop (toldlondon.com): the Awin CSV files, and Google-format
+TSV files for networks that read Google's column names (Addrevenue, from 20 Oct 2026: brand, shipping).
 
 Each feed is rendered by the shop's theme from the shop's live products, prices, stock and translations. This script
 fetches each one, refuses it unless it is complete (right header, at least 25 rows, no error line), and only then
@@ -21,6 +22,15 @@ FEEDS = {
     'told-feed-awin-sek-swe.csv': 'https://toldlondon.com/sv/collections/all?view=told-feed-awin&country=SE',
     'told-feed-awin-eur-deu.csv': 'https://toldlondon.com/de/collections/all?view=told-feed-awin&country=DE',
 }
+# Google-format TSV (theme template collection.told-feed-awin-google), same products and prices as the Awin files.
+GOOGLE_FEEDS = {
+    'told-feed-google-gbp-eng.tsv': 'https://toldlondon.com/collections/all?view=told-feed-awin-google&country=GB',
+    'told-feed-google-eur-fra.tsv': 'https://toldlondon.com/fr/collections/all?view=told-feed-awin-google&country=FR',
+    'told-feed-google-eur-deu.tsv': 'https://toldlondon.com/de/collections/all?view=told-feed-awin-google&country=DE',
+    'told-feed-google-eur-ita.tsv': 'https://toldlondon.com/it/collections/all?view=told-feed-awin-google&country=IT',
+    'told-feed-google-eur-nld.tsv': 'https://toldlondon.com/nl/collections/all?view=told-feed-awin-google&country=NL',
+    'told-feed-google-eur-spa.tsv': 'https://toldlondon.com/es/collections/all?view=told-feed-awin-google&country=ES',
+}
 UA = 'Mozilla/5.0 (Told London feed builder)'
 MIN_ROWS = 25
 
@@ -40,11 +50,21 @@ def fetch(url):
 
 def main():
     failed = []
-    for name, url in FEEDS.items():
+    for name, url in list(FEEDS.items()) + list(GOOGLE_FEEDS.items()):
         code, body = fetch(url)
         problem = None
         if code != 200 or not body.strip() or body.startswith('ERROR'):
             problem = 'HTTP %s: %r' % (code, body[:80])
+        elif name.endswith('.tsv'):
+            lines = [l for l in body.splitlines() if l.strip()]
+            head = lines[0].split('\t') if lines else []
+            if head[:5] != ['id', 'item_group_id', 'title', 'description', 'link'] or 'brand' not in head \
+                    or 'shipping' not in head:
+                problem = 'unexpected header'
+            elif len(lines) - 1 < MIN_ROWS:
+                problem = 'only %d rows' % (len(lines) - 1)
+            elif any(len(l.split('\t')) != len(head) for l in lines[1:]):
+                problem = 'a row has the wrong number of columns'
         else:
             rows = list(csv.reader(io.StringIO(body)))
             if not rows or rows[0][:3] != ['product_id', 'product_name', 'description']:

@@ -1,6 +1,6 @@
 # Told London product feeds
 
-Product feed files for Told London's affiliate partners on Awin, rebuilt daily from [toldlondon.com](https://toldlondon.com)
+Product feed files for Told London's affiliate partners on Awin and Addrevenue, rebuilt daily from [toldlondon.com](https://toldlondon.com)
 and served by GitHub Pages. They contain only what the public shop shows: product names, descriptions, prices, stock
 and links.
 
@@ -17,5 +17,17 @@ and links.
 | told-feed-awin-dkk-dan.csv | DKK | Danish |
 | told-feed-awin-sek-swe.csv | SEK | Swedish |
 | told-feed-awin-eur-deu.csv | EUR | German (with price per kg or litre) |
+
+Google-format files (tab-separated, Google Shopping column names such as `brand` and `shipping`), same products and
+prices:
+
+| File | Currency | Language |
+|---|---|---|
+| told-feed-google-gbp-eng.tsv | GBP | English |
+| told-feed-google-eur-fra.tsv | EUR | French |
+| told-feed-google-eur-deu.tsv | EUR | German (with price per kg or litre) |
+| told-feed-google-eur-ita.tsv | EUR | Italian |
+| told-feed-google-eur-nld.tsv | EUR | Dutch |
+| told-feed-google-eur-spa.tsv | EUR | Spanish |
 
 Questions: affiliates@toldlondon.com
