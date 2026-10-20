@@ -29,6 +29,9 @@ prices:
 | told-feed-google-eur-ita.tsv | EUR | Italian |
 | told-feed-google-eur-nld.tsv | EUR | Dutch |
 | told-feed-google-eur-spa.tsv | EUR | Spanish |
+| told-feed-google-sek-swe.tsv | SEK | Swedish (no shipping column: priced in local currency) |
+| told-feed-google-dkk-dan.tsv | DKK | Danish (no shipping column: priced in local currency) |
+| told-feed-google-eur-eng.tsv | EUR | English (Ireland) |
 
 Google Merchant Centre supplemental file (product highlights, product details and material, keyed on Merchant Centre's
 own product ids): `told-feed-google-extra-eng.tsv`, English.
