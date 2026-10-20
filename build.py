@@ -30,6 +30,9 @@ GOOGLE_FEEDS = {
     'told-feed-google-eur-ita.tsv': 'https://toldlondon.com/it/collections/all?view=told-feed-awin-google&country=IT',
     'told-feed-google-eur-nld.tsv': 'https://toldlondon.com/nl/collections/all?view=told-feed-awin-google&country=NL',
     'told-feed-google-eur-spa.tsv': 'https://toldlondon.com/es/collections/all?view=told-feed-awin-google&country=ES',
+    # Google Merchant Centre supplemental (product highlights, details, material), English; keyed on Merchant Centre's
+    # own ids (shopify_ZZ_<product>_<variant>). Theme template collection.told-feed-google-extra, 20 Oct 2026.
+    'told-feed-google-extra-eng.tsv': 'https://toldlondon.com/collections/all?view=told-feed-google-extra&country=GB',
 }
 UA = 'Mozilla/5.0 (Told London feed builder)'
 MIN_ROWS = 25
@@ -58,7 +61,10 @@ def main():
         elif name.endswith('.tsv'):
             lines = [l for l in body.splitlines() if l.strip()]
             head = lines[0].split('\t') if lines else []
-            if head[:5] != ['id', 'item_group_id', 'title', 'description', 'link'] or 'brand' not in head \
+            if name.startswith('told-feed-google-extra'):
+                if head[:3] != ['id', 'material', 'product_highlight'] or 'product_detail' not in head:
+                    problem = 'unexpected header'
+            elif head[:5] != ['id', 'item_group_id', 'title', 'description', 'link'] or 'brand' not in head \
                     or 'shipping' not in head:
                 problem = 'unexpected header'
             elif len(lines) - 1 < MIN_ROWS:
