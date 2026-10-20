@@ -17,6 +17,7 @@ and links.
 | told-feed-awin-dkk-dan.csv | DKK | Danish |
 | told-feed-awin-sek-swe.csv | SEK | Swedish |
 | told-feed-awin-eur-deu.csv | EUR | German (with price per kg or litre) |
+| told-feed-awin-nok-nor.csv | NOK | Norwegian (no delivery_cost: priced in local currency) |
 
 Google-format files (tab-separated, Google Shopping column names such as `brand` and `shipping`), same products and
 prices:

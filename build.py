@@ -21,6 +21,7 @@ FEEDS = {
     'told-feed-awin-dkk-dan.csv': 'https://toldlondon.com/da/collections/all?view=told-feed-awin&country=DK',
     'told-feed-awin-sek-swe.csv': 'https://toldlondon.com/sv/collections/all?view=told-feed-awin&country=SE',
     'told-feed-awin-eur-deu.csv': 'https://toldlondon.com/de/collections/all?view=told-feed-awin&country=DE',
+    'told-feed-awin-nok-nor.csv': 'https://toldlondon.com/nb/collections/all?view=told-feed-awin&country=NO',
 }
 # Google-format TSV (theme template collection.told-feed-awin-google), same products and prices as the Awin files.
 GOOGLE_FEEDS = {
