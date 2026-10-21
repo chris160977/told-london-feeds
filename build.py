@@ -36,6 +36,10 @@ GOOGLE_FEEDS = {
     'told-feed-google-sek-swe.tsv': 'https://toldlondon.com/sv/collections/all?view=told-feed-awin-google&country=SE',
     'told-feed-google-dkk-dan.tsv': 'https://toldlondon.com/da/collections/all?view=told-feed-awin-google&country=DK',
     'told-feed-google-eur-eng.tsv': 'https://toldlondon.com/collections/all?view=told-feed-awin-google&country=IE',
+    # Added 21 Oct 2026 for Addrevenue (Christopher's approval via the Addrevenue session); NO is priced in NOK,
+    # so its shipping column is blank.
+    'told-feed-google-eur-fin.tsv': 'https://toldlondon.com/fi/collections/all?view=told-feed-awin-google&country=FI',
+    'told-feed-google-nok-nor.tsv': 'https://toldlondon.com/nb/collections/all?view=told-feed-awin-google&country=NO',
     # Google Merchant Centre supplemental (product highlights, details, material), English; keyed on Merchant Centre's
     # own ids (shopify_ZZ_<product>_<variant>). Theme template collection.told-feed-google-extra, 20 Oct 2026.
     'told-feed-google-extra-eng.tsv': 'https://toldlondon.com/collections/all?view=told-feed-google-extra&country=GB',

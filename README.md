@@ -33,6 +33,8 @@ prices:
 | told-feed-google-sek-swe.tsv | SEK | Swedish (no shipping column: priced in local currency) |
 | told-feed-google-dkk-dan.tsv | DKK | Danish (no shipping column: priced in local currency) |
 | told-feed-google-eur-eng.tsv | EUR | English (Ireland) |
+| told-feed-google-eur-fin.tsv | EUR | Finnish |
+| told-feed-google-nok-nor.tsv | NOK | Norwegian (no shipping column: priced in local currency) |
 
 Google Merchant Centre supplemental file (product highlights, product details and material, keyed on Merchant Centre's
 own product ids): `told-feed-google-extra-eng.tsv`, English.
