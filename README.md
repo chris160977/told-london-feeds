@@ -37,6 +37,6 @@ prices:
 | told-feed-google-nok-nor.tsv | NOK | Norwegian |
 
 Google Merchant Centre supplemental file (product highlights, product details and material, keyed on Merchant Centre's
-own product ids): `told-feed-google-extra-eng.tsv`, English.
+own product ids): `told-feed-google-extra-eng.tsv` (English), and `-ita`, `-fra`, `-deu`, `-spa`, `-nld`, `-fin`, `-dan`, `-swe`, `-nor`.
 
 Questions: affiliates@toldlondon.com

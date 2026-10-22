@@ -43,6 +43,16 @@ GOOGLE_FEEDS = {
     # Google Merchant Centre supplemental (product highlights, details, material), English; keyed on Merchant Centre's
     # own ids (shopify_ZZ_<product>_<variant>). Theme template collection.told-feed-google-extra, 20 Oct 2026.
     'told-feed-google-extra-eng.tsv': 'https://toldlondon.com/collections/all?view=told-feed-google-extra&country=GB',
+    # Translated (Translations 10, 22 Oct 2026); same ids, highlights in each language.
+    'told-feed-google-extra-ita.tsv': 'https://toldlondon.com/it/collections/all?view=told-feed-google-extra&country=IT',
+    'told-feed-google-extra-fra.tsv': 'https://toldlondon.com/fr/collections/all?view=told-feed-google-extra&country=FR',
+    'told-feed-google-extra-deu.tsv': 'https://toldlondon.com/de/collections/all?view=told-feed-google-extra&country=DE',
+    'told-feed-google-extra-spa.tsv': 'https://toldlondon.com/es/collections/all?view=told-feed-google-extra&country=ES',
+    'told-feed-google-extra-nld.tsv': 'https://toldlondon.com/nl/collections/all?view=told-feed-google-extra&country=NL',
+    'told-feed-google-extra-fin.tsv': 'https://toldlondon.com/fi/collections/all?view=told-feed-google-extra&country=FI',
+    'told-feed-google-extra-dan.tsv': 'https://toldlondon.com/da/collections/all?view=told-feed-google-extra&country=DK',
+    'told-feed-google-extra-swe.tsv': 'https://toldlondon.com/sv/collections/all?view=told-feed-google-extra&country=SE',
+    'told-feed-google-extra-nor.tsv': 'https://toldlondon.com/nb/collections/all?view=told-feed-google-extra&country=NO',
 }
 UA = 'Mozilla/5.0 (Told London feed builder)'
 MIN_ROWS = 25
