@@ -53,6 +53,15 @@ GOOGLE_FEEDS = {
     'told-feed-google-extra-dan.tsv': 'https://toldlondon.com/da/collections/all?view=told-feed-google-extra&country=DK',
     'told-feed-google-extra-swe.tsv': 'https://toldlondon.com/sv/collections/all?view=told-feed-google-extra&country=SE',
     'told-feed-google-extra-nor.tsv': 'https://toldlondon.com/nb/collections/all?view=told-feed-google-extra&country=NO',
+    # The last eight published languages (Translations 10, 22 Oct 2026). zho-hans is Simplified, zho-hant Traditional.
+    'told-feed-google-extra-por.tsv': 'https://toldlondon.com/pt/collections/all?view=told-feed-google-extra&country=PT',
+    'told-feed-google-extra-lit.tsv': 'https://toldlondon.com/lt/collections/all?view=told-feed-google-extra&country=LT',
+    'told-feed-google-extra-pol.tsv': 'https://toldlondon.com/pl/collections/all?view=told-feed-google-extra&country=PL',
+    'told-feed-google-extra-ara.tsv': 'https://toldlondon.com/ar/collections/all?view=told-feed-google-extra&country=AE',
+    'told-feed-google-extra-jpn.tsv': 'https://toldlondon.com/ja/collections/all?view=told-feed-google-extra&country=JP',
+    'told-feed-google-extra-kor.tsv': 'https://toldlondon.com/ko/collections/all?view=told-feed-google-extra&country=KR',
+    'told-feed-google-extra-zho-hans.tsv': 'https://toldlondon.com/zh-hans/collections/all?view=told-feed-google-extra&country=SG',
+    'told-feed-google-extra-zho-hant.tsv': 'https://toldlondon.com/zh-hant/collections/all?view=told-feed-google-extra&country=HK',
 }
 UA = 'Mozilla/5.0 (Told London feed builder)'
 MIN_ROWS = 25
