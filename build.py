@@ -68,6 +68,9 @@ MIN_ROWS = 25
 
 
 def fetch(url):
+    # A unique parameter on every request, so the storefront cannot serve a page cached before a price change (the
+    # Black Friday switches rebuild seconds after the prices move). The theme templates ignore it.
+    url = url + '&cb=%d' % time.time_ns()
     for attempt in range(4):
         r = subprocess.run(['curl', '-s', '-L', '--max-time', '60', '-A', UA, '-w', '\n%{http_code}', url],
                            capture_output=True, text=True)
