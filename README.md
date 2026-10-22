@@ -40,3 +40,9 @@ Google Merchant Centre supplemental file (product highlights, product details an
 own product ids): `told-feed-google-extra-eng.tsv` (English), and `-ita`, `-fra`, `-deu`, `-spa`, `-nld`, `-fin`, `-dan`, `-swe`, `-nor`.
 
 Questions: affiliates@toldlondon.com
+
+Meta catalogue supplementary feed (tab-separated), added 22 Oct 2026:
+
+| File | Purpose |
+|---|---|
+| told-feed-meta-india.tsv | India fields for Meta's catalogue: `id` (the catalogue content id, Shopify's variant id), `origin_country`, and the importer's name and address. Country of origin by SKU as held in Shopify; a SKU with no listed origin gets no row. |

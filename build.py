@@ -7,7 +7,7 @@ fetches each one, refuses it unless it is complete (right header, at least 25 ro
 replaces the file here. GitHub Pages serves the folder, so partners always read a complete, current file.
 Runs daily from .github/workflows/build.yml. Nothing here is private: it is the same data the public shop shows.
 """
-import csv, io, os, subprocess, sys, time, datetime
+import csv, io, json, os, subprocess, sys, time, datetime
 
 FEEDS = {
     'told-feed-awin-gbp-eng.csv': 'https://toldlondon.com/collections/all?view=told-feed-awin&country=GB',
@@ -121,9 +121,56 @@ def main():
             f.write(body)
         print('%s: %d bytes' % (name, len(body.encode())))
         time.sleep(1)
+    if not build_meta_india():
+        failed.append(META_INDIA_FILE)
     with open('last-built.txt', 'w') as f:
         f.write(datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds') + '\n')
     sys.exit(1 if failed else 0)
+
+
+# Meta catalogue supplementary feed for India (22 Oct 2026, Christopher's go): Meta will not show products to shoppers
+# in India without origin_country, and, for goods not made in India, the importer's name and address. Keyed on the
+# catalogue's content id, which is the Shopify variant id. Country of origin is the value held in Shopify on each
+# variant (read 22 Oct 2026) by SKU prefix; a SKU not listed here gets NO row (never a guessed origin), and Meta's
+# India warning, read by the daily Meta check, then shows the gap. Importer decided by Christopher, 22 Oct 2026.
+META_INDIA_FILE = 'told-feed-meta-india.tsv'
+ORIGIN_BY_SKU_PREFIX = (('ACC-KIT-WTS', 'CN'), ('CANRF-', 'GB'), ('CAN-', 'GB'), ('CDS-', 'GB'), ('DIFRF-', 'GB'),
+                        ('DIF-', 'GB'))
+IMPORTER = ('Told London Ltd', '167-169 Great Portland Street', 'London', 'W1W 5PF', 'GB')
+
+
+def build_meta_india():
+    variants, page = [], 1
+    while True:
+        code, body = fetch('https://toldlondon.com/products.json?limit=250&page=%d' % page)
+        if code != 200:
+            print('%s: NOT replaced (products.json HTTP %s); the previous file stays' % (META_INDIA_FILE, code))
+            return False
+        products = json.loads(body).get('products', [])
+        if not products:
+            break
+        for p in products:
+            variants += [v for v in p.get('variants', []) if v.get('sku')]
+        page += 1
+    rows, unknown = [], []
+    for v in variants:
+        origin = next((c for prefix, c in ORIGIN_BY_SKU_PREFIX if v['sku'].startswith(prefix)), None)
+        if not origin:
+            unknown.append(v['sku'])
+            continue
+        rows.append([str(v['id']), origin] + ([] if origin == 'IN' else list(IMPORTER)))
+    if unknown:
+        print('%s: no origin listed for %s; those products get no row' % (META_INDIA_FILE, ', '.join(sorted(unknown))))
+    if len(rows) < MIN_ROWS:
+        print('%s: NOT replaced (only %d rows); the previous file stays' % (META_INDIA_FILE, len(rows)))
+        return False
+    head = ['id', 'origin_country', 'importer_name', 'importer_address.street1', 'importer_address.city',
+            'importer_address.postal_code', 'importer_address.country']
+    body = '\n'.join('\t'.join(r) for r in [head] + sorted(rows)) + '\n'
+    with open(META_INDIA_FILE, 'w', encoding='utf-8', newline='') as f:
+        f.write(body)
+    print('%s: %d rows' % (META_INDIA_FILE, len(rows)))
+    return True
 
 
 if __name__ == '__main__':
